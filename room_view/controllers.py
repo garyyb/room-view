@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.template.response import TemplateResponse
 
 def index(request):
-    return HttpResponse("Index Page Placeholder")
+    return TemplateResponse(request, 'index.html', {})
