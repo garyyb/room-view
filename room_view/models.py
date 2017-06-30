@@ -18,13 +18,13 @@ class Lesson(models.Model):
     )
 
     DAY_OPTIONS = (
-        ('MON', 'Monday'),
-        ('TUE', 'Tuesday'),
-        ('WED', 'Wednesday'),
-        ('THU', 'Thursday'),
-        ('FRI', 'Friday'),
-        ('SAT', 'Saturday'),
-        ('SUN', 'Sunday')
+        ('Mon', 'Monday'),
+        ('Tue', 'Tuesday'),
+        ('Wed', 'Wednesday'),
+        ('Thu', 'Thursday'),
+        ('Fri', 'Friday'),
+        ('Sat', 'Saturday'),
+        ('Sun', 'Sunday')
     )
 
     location = models.CharField(max_length=128)
