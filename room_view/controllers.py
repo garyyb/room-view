@@ -28,14 +28,11 @@ def free_now(request):
         ]
     }
 
-    try:
-        data_type = request.GET.__getitem__('dataType')
-    except KeyError:
-        return HttpResponse(status=400)
+    data_type = request.META['HTTP_ACCEPT'].split(',')[0]
 
-    if data_type == 'json':
+    if data_type == 'application/json':
         return JsonResponse(data)
-    elif data_type == 'text':
+    elif data_type == 'application/text':
         return HttpResponse(str(data))
     else:
         return HttpResponse(status=400)
