@@ -1,5 +1,6 @@
 from django.template.response import TemplateResponse
 from django.http import JsonResponse
+from django.http import HttpResponse
 
 def index(request):
     return TemplateResponse(request, 'index.html', {})
@@ -16,21 +17,25 @@ def free_now(request):
         [
         {
             'location'   : 'test_location G01',
-            'code'       : 'TEST1234',
             'start_time' : '12:00',
             'end_time'   : '15:00',
-            'type'       : 'Lecture',
-            'day'        : 'Monday'
         },
         {
             'location': 'test_location 103',
-            'code': 'MATH0000',
             'start_time': '09:00',
             'end_time': '10:00',
-            'type': 'Tutorial',
-            'day': 'Tuesday'
         }
         ]
     }
 
-    return JsonResponse(data)
+    try:
+        data_type = request.GET.__getitem__('dataType')
+    except KeyError:
+        return HttpResponse(status=400)
+
+    if data_type == 'json':
+        return JsonResponse(data)
+    elif data_type == 'text':
+        return HttpResponse(str(data))
+    else:
+        return HttpResponse(status=400)
