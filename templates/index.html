@@ -1,15 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "css/index.css" %}">
 {% endblock %}
 
 {% block content %}
     <div class="col col-md-6 col-md-offset-3">
         <div class="row">
-            <div class="input-group">
-                <input type="text" class="form-control" name="query" placeholder="Search for a room...">
-            </div>
+            <input type="text" class="form-control" name="query" placeholder="Search for a room...">
         </div>
     </div>
 {% endblock %}
