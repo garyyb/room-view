@@ -1,4 +1,5 @@
 '''
+Install scrapy
 Run with 'rm classes.jl; scrapy runspider classes.py -s LOG_ENABLED=False -o classes.jl'  
 '''
 import scrapy
