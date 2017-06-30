@@ -1,6 +1,6 @@
 from django.db import models
 
-class lesson(models.Model):
+class Lesson(models.Model):
     TYPE_OPTIONS = (
         ('Clinical', 'Clinical'),
         ('Laboratory', 'Laboratory'),
@@ -31,5 +31,5 @@ class lesson(models.Model):
     code = models.CharField(max_length=8)
     start_time = models.TimeField()
     end_time = models.TimeField()
-    type = models.CharField(choices=TYPE_OPTIONS)
-    day = models.CharField(choices=DAY_OPTIONS)
+    type = models.CharField(max_length=32, choices=TYPE_OPTIONS)
+    day = models.CharField(max_length=16, choices=DAY_OPTIONS)
