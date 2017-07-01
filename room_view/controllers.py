@@ -7,8 +7,8 @@ def index(request):
 
 # Return data for currently free rooms.
 def free_now(request):
-    # TODO: Implement
-    # TODO: Remove test response.
+    # TODO: Implement (ie, dynamically generate the 'data' dictionary below)
+    # TODO: Remove test data.
 
     data = \
     {
@@ -28,6 +28,7 @@ def free_now(request):
         ]
     }
 
+    # Everything after this should be fine.
     data_type = request.META['HTTP_ACCEPT'].split(',')[0]
 
     if data_type == 'application/json':
