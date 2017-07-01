@@ -21,7 +21,11 @@ from django.conf import settings
 from . import controllers
 
 urlpatterns = [
+    # Ajax Request Routes
+    #############################################
     url(r'^ajax/freenow', controllers.free_now),
+    url(r'^ajax/roomquery', controllers.room_query),
+    #############################################
     url(r'^admin/', admin.site.urls),
     url(r'^$', controllers.index),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
