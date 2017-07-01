@@ -41,6 +41,10 @@ def free_now(request):
 def room_query(request):
     # TODO: Implement (ie, dynamically generate the 'data' dictionary below)
     # TODO: Remove test data.
+    try:
+        query = request.GET.__getitem__('query')
+    except KeyError:
+        return HttpResponse(400)
 
     data = \
         {
