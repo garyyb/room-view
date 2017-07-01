@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2">
+    <div class="col col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
         <div class="row" style="text-align:center;" data-toggle="collapse" data-target="#free_now_tbl_collapse">
             <button class="btn btn-info" id="free_now_btn">Show me what rooms are free right now!</button>
         </div>
@@ -24,8 +24,8 @@
                 <thead>
                     <tr>
                         <th>Location</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
+                        <th>Free From</th>
+                        <th>Unavailable At</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,8 +37,24 @@
                 <span><i style="color: grey;">or</i></span>
             </div>
         </div>
+        <!-- Room Search Feature !-->
         <div class="row">
-            <input type="text" class="form-control" name="query" placeholder="Search for a room...">
+            <div class="col col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1">
+                <input type="text" class="form-control" id="room_search" placeholder="Search for a room...">
+            </div>
+        </div>
+        <div class="collapse" id="room_search_collapse">
+            <table id="room_search_tbl" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Free From</th>
+                        <th>Unavailable At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
