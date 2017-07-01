@@ -69,6 +69,6 @@ $(document).ready(function(){
             } else if (query.length === 0) {
                 room_search_tbl.clear();
             }
-        }, 1000);
+        }, 250);
     });
 });
