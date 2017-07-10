@@ -10,6 +10,10 @@ $(document).ready(function(){
             {"name" : "start_time", "title" : "Start Time",  "targets" : 1},
             {"name" : "end_time", "title" : "End Time", "targets" : 2}
         ],
+        language    : {
+            emptyTable : "There don't appear to be any free rooms right now. " +
+            "As this is quite odd, please contact the administrator."
+        }
     });
 
     var free_now_btn = $("#free_now_btn");
@@ -57,6 +61,7 @@ $(document).ready(function(){
         var collapser = $("#room_search_collapse");
 
         if (query.match(/^\s*$/)) {
+            room_search_tbl.draw();
             collapser.collapse();
             return;
         }
