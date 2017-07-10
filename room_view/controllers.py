@@ -16,11 +16,13 @@ def free_now(request):
         'classes'     : \
         [
         {
+            'id'         : 3,
             'location'   : 'test_location G01',
             'start_time' : '12:00',
             'end_time'   : '15:00',
         },
         {
+            'id'        : 4,
             'location': 'test_location 103',
             'start_time': '09:00',
             'end_time': '10:00',
@@ -52,11 +54,13 @@ def room_query(request):
             'classes': \
                 [
                     {
+                        'id' : 1,
                         'location': 'Test Building 1 Room 1',
                         'start_time': '12:00',
                         'end_time': '15:00',
                     },
                     {
+                        'id' : 2,
                         'location': 'Test Building 1 Room 2',
                         'start_time': '09:00',
                         'end_time': '10:00',

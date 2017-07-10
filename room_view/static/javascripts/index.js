@@ -26,7 +26,7 @@ $(document).ready(function(){
                     // free_now_tbl.rows.add(data.classes).draw();
                     data.classes.forEach(function(entry) {
                         free_now_tbl.row.add([
-                            entry.location,
+                            "<a href=/location/" + entry.id + ">" + entry.location + "<\a>",
                             entry.start_time,
                             entry.end_time
                         ]);
@@ -75,7 +75,7 @@ $(document).ready(function(){
                 data.classes.forEach(function(entry) {
                     console.log(entry.location);
                     room_search_tbl.row.add([
-                        entry.location,
+                        "<a href=/location/" + entry.id + ">" + entry.location + "<\a>",
                         entry.start_time,
                         entry.end_time
                     ]);
