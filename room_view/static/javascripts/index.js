@@ -36,39 +36,51 @@ $(document).ready(function(){
     });
 
     var room_search_tbl = $('#room_search_tbl').DataTable({
-
+        responsive  : true,
+        autoWidth   : true,
+        columnsDefs : [
+            {"name" : "location", "title" : "Location", "targets" : 0},
+            {"name" : "start_time", "title" : "Start Time",  "targets" : 1},
+            {"name" : "end_time", "title" : "End Time", "targets" : 2}
+        ],
+        language    : {
+            emptyTable : "No results found :("
+        }
     });
 
-    $("#room_search_box").on('input propertychange paste', function() {
+    $("#room_search_box").keydown(function(e) {
+        if (event.which !== 13) return;
+        room_search_tbl.clear();
+
         var query = $("#room_search_box").val().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+        var collapser = $("#room_search_collapse");
+
+        if (query.match(/^\s*$/)) {
+            collapser.collapse();
+            return;
+        }
+
         // Display a spinner here.
-        setTimeout(function() {
-            if ($("#room_search_box").val().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') !== query) return;
-
-            if (query.length > 2) {
-                $.ajax({
-                    url      : '/ajax/roomquery',
-                    dataType : 'json',
-                    data     : {'query' : query},
-                    success  : function (data) {
-                        data.classes.forEach(function(entry) {
-                            room_search_tbl.row.add([
-                                entry.location,
-                                entry.start_time,
-                                entry.end_time
-                            ]);
-                        });
-                    }
+        $.ajax({
+            url      : '/ajax/roomquery',
+            dataType : 'json',
+            data     : {'query' : query},
+            success  : function (data) {
+                data.classes.forEach(function(entry) {
+                    console.log(entry.location);
+                    room_search_tbl.row.add([
+                        entry.location,
+                        entry.start_time,
+                        entry.end_time
+                    ]);
+                    room_search_tbl.draw();
                 });
-
-                if (!$("#room_search_collapse").attr("aria-expanded")) {
-                    $("#room_search_collapse").collapse();
-                }
-
-                room_search_tbl.draw();
-            } else if (query.length === 0) {
-                room_search_tbl.clear();
             }
-        }, 250);
+        });
+
+        if (!collapser.attr("aria-expanded")) {
+            collapser.collapse();
+        }
     });
 });
