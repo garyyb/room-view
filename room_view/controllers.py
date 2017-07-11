@@ -2,11 +2,26 @@ from django.template.response import TemplateResponse
 from django.http import JsonResponse
 from django.http import HttpResponse
 
+import datetime
+
 def index(request):
     return TemplateResponse(request, 'index.html', {})
 
 def location(request, id):
-    pass
+    # TODO: Get timetable for the location.
+
+    data = \
+    {
+        'location' : 'Test Building 1 Room 1',
+        'free_periods' : \
+        [
+            (datetime.time(9), datetime.time(12)),
+            (datetime.time(13, 30), datetime.time(15)),
+            (datetime.time(17), datetime.time(0))
+        ]
+    }
+
+    return TemplateResponse(request, 'location.html', data)
 
 ################
 # AJAX Queries #
