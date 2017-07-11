@@ -5,6 +5,13 @@ from django.http import HttpResponse
 def index(request):
     return TemplateResponse(request, 'index.html', {})
 
+def location(request, id):
+    pass
+
+################
+# AJAX Queries #
+################
+
 # Return data for currently free rooms.
 def free_now(request):
     # TODO: Implement (ie, dynamically generate the 'data' dictionary below)

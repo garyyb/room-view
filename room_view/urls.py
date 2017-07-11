@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^ajax/roomquery', controllers.room_query),
     #############################################
     url(r'^admin/', admin.site.urls),
+    url(r'^location/(?P<id>[0-9]+)', controllers.location),
     url(r'^$', controllers.index),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
