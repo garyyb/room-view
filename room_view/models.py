@@ -13,7 +13,7 @@ class Room(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.room_id
+        return self.building.name + " " + self.room_id
 
 
 class Lesson(models.Model):

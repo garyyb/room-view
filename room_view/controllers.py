@@ -44,7 +44,7 @@ def free_now(request):
             data['num_classes']+=1
             temp = {
                     'id'        : l.pk,
-                    'location'  : l.code,
+                    'location'  : str(l.location),
                     'start_time': l.start_time,
                     'end_time'  : l.end_time,
             }
@@ -78,7 +78,7 @@ def room_query(request):
             data['num_classes']+=1
             temp = {
                     'id'        : lesson.pk,
-                    'location'  : lesson.code,
+                    'location'  : str(lesson.location),
                     'start_time': lesson.start_time,
                     'end_time'  : lesson.end_time,
             }
