@@ -11,8 +11,7 @@ $(document).ready(function(){
             {"name" : "end_time", "title" : "End Time", "targets" : 2}
         ],
         language    : {
-            emptyTable : "There don't appear to be any free rooms right now. " +
-            "As this is quite odd, please contact the administrator."
+            emptyTable : "Fetching data..."
         }
     });
 
