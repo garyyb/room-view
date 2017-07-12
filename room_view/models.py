@@ -4,11 +4,10 @@ import sys
 
 
 class Building(models.Model):
-    
+    pass
 
 class Room(models.Model):
-    
-
+    pass
 
 class Lesson(models.Model):
     TYPE_OPTIONS = (
