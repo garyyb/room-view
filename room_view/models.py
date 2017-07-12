@@ -54,7 +54,7 @@ class Lesson(models.Model):
         return self.code +" "+ self.day + ": " + str(self.start_time) + "-" + str(self.end_time)
 
 
-    def is_in_use(self):
+    def happening_now(self):
         lt = (timezone.localtime(timezone.now()))     
         time = lt.time()
         dayStr = (self.DAY_OPTIONS)[lt.weekday()][0]

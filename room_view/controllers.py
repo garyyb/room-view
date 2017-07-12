@@ -1,4 +1,5 @@
 from django.template.response import TemplateResponse
+from django.utils import timezone
 from django.http import JsonResponse
 from django.http import HttpResponse
 
@@ -74,13 +75,32 @@ def room_query(request):
             }
 
     for room in Room.objects.filter(building__name__startswith=query):
-        for lesson in Lesson.objects.filter(location__room_id=room.room_id):
+        isFree = True
+        nextLesson = None
+        lt = timezone.localtime(timezone.now()).time()
+        for lesson in room.lesson_set.all():
+            if lesson.happening_now():
+                isFree = False 
+                break
+            #Keep track of the next lesson starting in the room
+            if lesson.end_time >= lt:
+                if nextLesson == None:
+                    nextLesson = lesson
+                else:
+                    if lesson.start_time < nextLesson.start_time:
+                        nextLesson = lesson
+        if isFree:
             data['num_classes']+=1
+            st = datetime.time(23,59)
+            et = datetime.time(23,59,59)
+            if (nextLesson == None):
+                st = nextLesson.start_time
+                et = nextLesson.end_time
             temp = {
-                    'id'        : lesson.pk,
-                    'location'  : str(lesson.location),
-                    'start_time': lesson.start_time,
-                    'end_time'  : lesson.end_time,
+                    'id'        : room.pk,
+                    'location'  : str(room),
+                    'start_time': st,
+                    'end_time'  : et, 
             }
             data['classes'].append(temp)
 
