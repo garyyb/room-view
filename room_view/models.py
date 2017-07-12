@@ -2,6 +2,14 @@ from django.db import models
 from django.utils import timezone
 import sys
 
+
+class Building(models.Model):
+    
+
+class Room(models.Model):
+    
+
+
 class Lesson(models.Model):
     TYPE_OPTIONS = (
         ('Clinical', 'Clinical'),
@@ -44,7 +52,6 @@ class Lesson(models.Model):
         lt = (timezone.localtime(timezone.now()))     
         time = lt.time()
         dayStr = (self.DAY_OPTIONS)[lt.weekday()][0]
-
         return (dayStr == self.day and self.start_time <= time and time <= self.end_time)
 
 

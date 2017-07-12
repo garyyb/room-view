@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 
 import datetime
+from .models import Lesson
 
 def index(request):
     return TemplateResponse(request, 'index.html', {})
@@ -32,25 +33,22 @@ def free_now(request):
     # TODO: Implement (ie, dynamically generate the 'data' dictionary below)
     # TODO: Remove test data.
 
-    data = \
-    {
-        'num_classes' : 2,
-        'classes'     : \
-        [
-        {
-            'id'         : 3,
-            'location'   : 'test_location G01',
-            'start_time' : '12:00',
-            'end_time'   : '15:00',
-        },
-        {
-            'id'        : 4,
-            'location': 'test_location 103',
-            'start_time': '09:00',
-            'end_time': '10:00',
-        }
-        ]
-    }
+    data = {
+            'num_classes'   : 0,
+            'classes'       : [],
+
+            }
+    L = Lesson.objects.all()
+    for l in L:
+        if (l.is_in_use()): 
+            data['num_classes']+=1
+            temp = {
+                    'id'        : l.pk,
+                    'location'  : l.location,
+                    'start_time': l.start_time,
+                    'end_time'  : l.end_time,
+            }
+            data['classes'].append(temp)
 
     # Everything after this should be fine.
     data_type = request.META['HTTP_ACCEPT'].split(',')[0]
