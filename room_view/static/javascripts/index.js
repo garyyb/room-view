@@ -53,7 +53,7 @@ $(document).ready(function(){
 
     $("#room_search_box").keydown(function(e) {
         if (event.which !== 13) return;
-        room_search_tbl.clear();
+        room_search_tbl.clear().draw();
 
         var query = $("#room_search_box").val().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
@@ -61,7 +61,6 @@ $(document).ready(function(){
 
         if (query.match(/^\s*$/)) {
             room_search_tbl.draw();
-            collapser.collapse();
             return;
         }
 

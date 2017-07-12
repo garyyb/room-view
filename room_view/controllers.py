@@ -93,7 +93,7 @@ def room_query(request):
             data['num_classes']+=1
             st = datetime.time(23,59)
             et = datetime.time(23,59,59)
-            if (nextLesson == None):
+            if (nextLesson != None):
                 st = nextLesson.start_time
                 et = nextLesson.end_time
             temp = {
