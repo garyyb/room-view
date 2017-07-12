@@ -4,10 +4,17 @@ import sys
 
 
 class Building(models.Model):
-    pass
+    name = models.CharField(max_length=128)
+    def __str__(self):
+        return self.name
 
 class Room(models.Model):
-    pass
+    room_id = models.CharField(max_length=32,default="")
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.room_id
+
 
 class Lesson(models.Model):
     TYPE_OPTIONS = (
@@ -36,7 +43,7 @@ class Lesson(models.Model):
         ('Sun', 'Sunday')
     )
 
-    location = models.CharField(max_length=128)
+    location = models.ForeignKey(Room)
     code = models.CharField(max_length=8)
     start_time = models.TimeField()
     end_time = models.TimeField()
@@ -44,7 +51,7 @@ class Lesson(models.Model):
     day = models.CharField(max_length=16, choices=DAY_OPTIONS)
 
     def __str__(self):
-        return self.day +" "+ self.location + ": " + str(self.start_time) + "-" + str(self.end_time)
+        return self.code +" "+ self.day + ": " + str(self.start_time) + "-" + str(self.end_time)
 
 
     def is_in_use(self):

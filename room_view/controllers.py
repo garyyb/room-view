@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 
 import datetime
-from .models import Lesson
+from .models import Lesson, Room, Building
 
 def index(request):
     return TemplateResponse(request, 'index.html', {})
@@ -44,7 +44,7 @@ def free_now(request):
             data['num_classes']+=1
             temp = {
                     'id'        : l.pk,
-                    'location'  : l.location,
+                    'location'  : l.code,
                     'start_time': l.start_time,
                     'end_time'  : l.end_time,
             }
@@ -67,26 +67,23 @@ def room_query(request):
         query = request.GET.__getitem__('query')
     except KeyError:
         return HttpResponse(400)
+    
+    data = {
+            'num_classes'   : 0,
+            'classes'       : [],
+            }
 
-    data = \
-        {
-            'num_classes': 2,
-            'classes': \
-                [
-                    {
-                        'id' : 1,
-                        'location': 'Test Building 1 Room 1',
-                        'start_time': '12:00',
-                        'end_time': '15:00',
-                    },
-                    {
-                        'id' : 2,
-                        'location': 'Test Building 1 Room 2',
-                        'start_time': '09:00',
-                        'end_time': '10:00',
-                    }
-                ]
-        }
+    for room in Room.objects.filter(building__name__startswith=query):
+        for lesson in Lesson.objects.filter(location__room_id=room.room_id):
+            data['num_classes']+=1
+            temp = {
+                    'id'        : lesson.pk,
+                    'location'  : lesson.code,
+                    'start_time': lesson.start_time,
+                    'end_time'  : lesson.end_time,
+            }
+            data['classes'].append(temp)
+
 
     data_type = request.META['HTTP_ACCEPT'].split(',')[0]
 

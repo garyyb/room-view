@@ -4,8 +4,19 @@ with open("classes.json", 'r') as fp:
     data = json.load(fp)
     conn = sqlite3.connect("db.sqlite3")
 
-    sql = ''' INSERT INTO room_view_lesson('location', 'code', 'start_time', 'end_time', 'type', 'day')
-      VALUES(?, ?, ?, ?, ?, ?) '''
+
+
+    sql = ''' INSERT INTO room_view_building('name')
+      VALUES(?) '''
+    row = ["Matthews"]
+    cur.execute(sql, row)
+
+ 
+    sql = ''' INSERT INTO room_view_room('room')
+      VALUES(?) '''
+    for key, entry in enumerate(data):
+        if (entry['loc'][:9] != "Matthews Theatr"[:9]): continue
+        room_entry = [1,entry[]
     cur = conn.cursor()
     # print(cur.fetchall())
     print(cur.description)
@@ -24,7 +35,7 @@ with open("classes.json", 'r') as fp:
             }
         }
         """
-        row = [entry['loc'], entry['code'],
+        lesson_entry = [entry['loc'], entry['code'],
                entry['start'], entry['end'],
                entry['type'], entry['day']]
 
