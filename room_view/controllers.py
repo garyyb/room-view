@@ -63,8 +63,7 @@ def free_now(request):
         return HttpResponse(status=400)
 
 def room_query(request):
-    # TODO: Implement (ie, dynamically generate the 'data' dictionary below)
-    # TODO: Remove test data.
+    # TODO: Implement the other request headers (building, duration, etc)
     try:
         query = request.GET.__getitem__('query')
     except KeyError:
@@ -95,7 +94,8 @@ def room_query(request):
             st = datetime.time(23,59)
             if (nextLesson != None):
                 st = nextLesson.start_time
-            timeDiff = datetime.combine(date.min,st) - datetime.combine(date.min, lt)
+
+            timeDiff = datetime.datetime.combine(datetime.datetime.min,st) - datetime.datetime.combine(datetime.datetime.min, lt)
             timeAvailable = datetime.time(math.floor(timeDiff.seconds/3600),math.floor((timeDiff.seconds%3600)/60))
             
             temp = {
