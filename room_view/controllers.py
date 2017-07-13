@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 
 import datetime
+import math
 from .models import Lesson, Room, Building
 
 def index(request):
@@ -41,7 +42,7 @@ def free_now(request):
             }
     L = Lesson.objects.all()
     for l in L:
-        if (l.is_in_use()): 
+        if (l.happening_now()): 
             data['num_classes']+=1
             temp = {
                     'id'        : l.pk,
@@ -92,15 +93,16 @@ def room_query(request):
         if isFree:
             data['num_classes']+=1
             st = datetime.time(23,59)
-            et = datetime.time(23,59,59)
             if (nextLesson != None):
                 st = nextLesson.start_time
-                et = nextLesson.end_time
+            timeDiff = datetime.combine(date.min,st) - datetime.combine(date.min, lt)
+            timeAvailable = datetime.time(math.floor(timeDiff.seconds/3600),math.floor((timeDiff.seconds%3600)/60))
+            
             temp = {
                     'id'        : room.pk,
                     'location'  : str(room),
                     'start_time': st,
-                    'end_time'  : et, 
+                    'end_time'  : timeAvailable, 
             }
             data['classes'].append(temp)
 
