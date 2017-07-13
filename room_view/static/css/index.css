@@ -40,7 +40,12 @@
 }
 
 .control-label {
+    margin-left: 12px !important;
     font-size: 14px !important;
+}
+
+::-webkit-input-placeholder {
+   font-size: 14px!important;
 }
 
 .jumbotron {
