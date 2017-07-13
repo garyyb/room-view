@@ -53,17 +53,17 @@ $(document).ready(function(){
         }
     });
 
-    $("#room_search_box").keydown(function(e) {
-        if (event.which !== 13) return;
+    $("#go").click(function() {
+        var collapser = $("#room_search_collapse");
         room_search_tbl.clear().draw();
 
-        var query = $("#room_search_box").val().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        var room_choice = $("#room-choice").val();
 
-        var collapser = $("#room_search_collapse");
+        if (room_choice === "any") {
 
-        if (query.match(/^\s*$/)) {
-            room_search_tbl.draw();
-            return;
+        } else {
+            // TODO:
+            var query = $("#room_search_box").val().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
         }
 
         // Display a spinner here.
