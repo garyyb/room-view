@@ -4,6 +4,10 @@
 $(document).ready(function(){
     $.material.init();
 
+    var d = new Date();
+    $("#hour-choice").val(d.getHours());
+    $("#minute-choice").val(d.getMinutes());
+
     var free_now_tbl = $('#free_now_tbl').DataTable({
         responsive  : true,
         autoWidth   : true,
@@ -53,24 +57,56 @@ $(document).ready(function(){
         }
     });
 
+    $("#room-choice").change(function(e) {
+        $("#room-search-box-collapse").collapse('toggle');
+    });
+
     $("#go").click(function() {
         var collapser = $("#room_search_collapse");
         room_search_tbl.clear().draw();
 
         var room_choice = $("#room-choice").val();
 
-        if (room_choice === "any") {
-
-        } else {
-            // TODO:
-            var query = $("#room_search_box").val().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        var query = "";
+        if (room_choice === "specific") {
+            query = $("#room-search-box").val();
+            query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
         }
+
+        var building_choice = $("#building-choice").val();
+
+        var building;
+        if (building_choice === "Any Building") {
+            building = "";
+        } else {
+            building = building_choice;
+        }
+        var dt = new Date();
+
+        var hour_choice = $("#hour-choice").val();
+        var hour;
+        if (hour_choice.length === 0) hour = dt.getHours();
+        else hour = hour_choice;
+
+        var minute_choice = $("#minute-choice").val();
+        var minute;
+        if (minute_choice.length === 0) minute = dt.getMinutes();
+        else minute = minute_choice;
+
+        var duration = $("#duration-choice").val();
 
         // Display a spinner here.
         $.ajax({
             url      : '/ajax/roomquery',
             dataType : 'json',
-            data     : {'query' : query},
+            data     :
+            {
+                'query'    : query,
+                'building' : building,
+                'hour'     : hour,
+                'minute'   : minute,
+                'duration' : duration
+            },
             success  : function (data) {
                 data.classes.forEach(function(entry) {
                     console.log(entry.location);
