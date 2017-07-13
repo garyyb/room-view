@@ -2,6 +2,8 @@
  * Created by red on 30-Jun-17.
  */
 $(document).ready(function(){
+    $.material.init();
+
     var free_now_tbl = $('#free_now_tbl').DataTable({
         responsive  : true,
         autoWidth   : true,

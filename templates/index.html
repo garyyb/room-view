@@ -17,17 +17,17 @@
 {% block content %}
     <div class="col col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
         <div class="row" style="text-align:center;" data-toggle="collapse" data-target="#free_now_tbl_collapse">
-            <button class="btn btn-info" id="free_now_btn">Show me what rooms are not free right now!</button>
+            <button class="btn btn-raised btn-info" id="free_now_btn">Show me what rooms are not free right now!</button>
         </div>
         <br>
         <div class="collapse" id="free_now_tbl_collapse">
             <table id="free_now_tbl" class="table table-striped" style="width:100%;">
                 <thead>
-                    <tr>
-                        <th>Location</th>
-                        <th>Lesson Start</th>
-                        <th>Lesson End</th>
-                    </tr>
+                <tr>
+                    <th>Location</th>
+                    <th>Lesson Start</th>
+                    <th>Lesson End</th>
+                </tr>
                 </thead>
                 <tbody>
                 </tbody>
@@ -40,19 +40,49 @@
         </div>
         <!-- Room Search Feature !-->
         <div class="row">
-            <div class="col col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1">
-                <input type="text" class="form-control" id="room_search_box" placeholder="Search for a building or room...">
-            </div>
+            <div class="col col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-10 col-sm-offset-1">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label" for="room-choice">I'm looking for</label>
+                        <select class="form-control" id="room-choice">
+                            <option>any</option>
+                            <option>specific</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="building-choice">rooms in</label>
+                        <select class="form-control" id="building-choice">
+                            <option>Any Building</option>
+                            <option>Goldstein</option>
+                            <option>Matthews</option>
+                            <option>K17</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label class="control-label" for="hour-choice">free from</label>
+                        <input class="form-control" id="hour-choice" type="number" style="width:4em;" min="0" max="24">
+                        :
+                        <input class="form-control" id="minute-choice" type="number" style="width:4em;" min="0" max="60">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="duration-choice">for</label>
+                        <input class="form-control" id="duration-choice" type="number" style="width:4em;" min="0" max="60" value="1">
+                        <label class="control-label" style="text-align: right;" for="duration-choice">hours.</label>
+                    </div>
+                    <button class="btn btn-info btn-raised">Go!</button>
+                </div>
         </div>
         <br>
         <div class="collapse" id="room_search_collapse">
             <table id="room_search_tbl" class="table table-striped" style="width:100%">
                 <thead>
-                    <tr>
-                        <th>Location</th>
-                        <th>Free Until</th>
-                        <th>Next Available At</th>
-                    </tr>
+                <tr>
+                    <th>Location</th>
+                    <th>Free Until</th>
+                    <th>Next Available At</th>
+                </tr>
                 </thead>
                 <tbody>
                 </tbody>
