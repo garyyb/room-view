@@ -39,6 +39,10 @@
     margin: 0 !important;
 }
 
+.control-label {
+    font-size: 14px !important;
+}
+
 .jumbotron {
 
 }
