@@ -59,6 +59,18 @@ class Lesson(models.Model):
         time = lt.time()
         dayStr = (self.DAY_OPTIONS)[lt.weekday()][0]
         return (dayStr == self.day and self.start_time <= time and time <= self.end_time)
+    
+    def is_happening(self,date):
+        time = date.time()
+        dayStr = (self.DAY_OPTIONS)[date.weekday()][0]
+        print(self.day)
+        return (dayStr == self.day and self.start_time <= time and time <= self.end_time)
+    
+    def compare_day(self,date):
+        dayStr = (self.DAY_OPTIONS)[date.weekday()][0]
+        return dayStr == self.day 
+
+
 
 
         

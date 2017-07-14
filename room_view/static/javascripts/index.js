@@ -22,7 +22,7 @@ $(document).ready(function(){
     });
 
     var free_now_btn = $("#free_now_btn");
-    $(free_now_btn).click(function(e){
+    $(free_now_btn).click(function(){
         if (!$("#free_now_tbl_collapse").attr("aria-expanded")) {
             $.ajax({
                 url      : '/ajax/freenow',
