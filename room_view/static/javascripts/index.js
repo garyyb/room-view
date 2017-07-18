@@ -86,7 +86,7 @@ $(document).ready(function(){
         var room_choice = $("#room-choice").val();
 
         var query = "";
-        if (room_choice === "specific") {
+        if (room_choice === "Specific Rooms") {
             query = $("#room-search-box").val();
             query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
         }
