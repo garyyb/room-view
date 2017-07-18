@@ -61,6 +61,24 @@ $(document).ready(function(){
         $("#room-search-box-collapse").collapse('toggle');
     });
 
+    $("#building-choice").change(function(e) {
+        $("#building-choice-list-collapse").collapse('toggle');
+    });
+
+    var selected_buildings = [];
+
+    $('#building-choice-list').children().click(function(e) {
+        var this_ = $(this);
+
+        if (this_.attr('data-selected') === "false") {
+            this_.attr('data-selected', "true");
+            selected_buildings.push(this_.attr('id'));
+        } else {
+            this_.attr('data-selected', "false");
+            selected_buildings.filter(function(e) {return e !== this_.attr('id')});
+        }
+    });
+
     $("#go").click(function() {
         var collapser = $("#room_search_collapse");
         room_search_tbl.clear().draw();
@@ -79,7 +97,7 @@ $(document).ready(function(){
         if (building_choice === "Any Building") {
             building = "";
         } else {
-            building = building_choice;
+            building = selected_buildings.toString();
         }
         var dt = new Date();
 

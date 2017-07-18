@@ -48,6 +48,6 @@
    font-size: 14px!important;
 }
 
-.jumbotron {
-
+label[data-selected="true"] {
+   background-color: royalblue !important;
 }
