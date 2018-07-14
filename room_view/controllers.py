@@ -79,9 +79,9 @@ def room_query(request):
             'classes'       : [],
             }
 
+    print(query)
     for location in query:
-        for room in Room.objects.filter(building__name=location):
-            print(room)
+        for room in Room.objects.filter(building__name__iexact=location):
             isFree = True
             nextLesson = None
 
@@ -92,6 +92,7 @@ def room_query(request):
                     break
                 #Keep track of the next lesson starting in the room
                 if lesson.end_time >= start_time:
+                    print(lesson)
                     if nextLesson == None:
                         nextLesson = lesson
                     else:

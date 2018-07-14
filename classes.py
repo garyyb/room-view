@@ -17,12 +17,18 @@ class QuotesSpider(scrapy.Spider):
             yield scrapy.Request(response.urljoin(href), callback=self.parse_course)
 
     def parse_course(self, response):
-        print("parsing: " + response.xpath('//table[3]/tr[1]/td/table/tr[9]/td/table[1]/tr[3]/td[2]/text()').extract_first())
-        for subjects in response.xpath('//table[3]/tr[1]/td/table/tr[9]/td/table[2]/tr[2]/td/table/tr[@class]'):
-            href = subjects.xpath('./td[1]/a[@href]/@href').extract_first()
-            #subject code
-            print(href);
-            yield scrapy.Request(response.urljoin(href), callback=self.parse_subject)
+        tmp=[]
+        #tmp contains the undergrad AND postgrad tables
+        tmp.append(response.xpath('//table[3]/tr[1]/td/table/tr[9]'))
+        tmp.append(response.xpath('//table[3]/tr[1]/td/table/tr[13]'))
+
+        for table in tmp:
+            print("parsing: " + table.xpath('./td/table[1]/tr[3]/td[2]/text()').extract_first())
+            for subjects in table.xpath('./td/table[2]/tr[2]/td/table/tr[@class]'):
+                href = subjects.xpath('./td[1]/a[@href]/@href').extract_first()
+                #subject code
+                print(href);
+                yield scrapy.Request(response.urljoin(href), callback=self.parse_subject)
 
     def parse_subject(self, response):
         code = response.xpath('//table[3]/tr[1]/td/table/tr[5]/td/text()').extract_first()[:8]
@@ -39,11 +45,11 @@ class QuotesSpider(scrapy.Spider):
                 for lesson in offering.xpath('./tr[12]/td/table/tr[@class]'): 
                     info = lesson.xpath('./td/text()').extract()
                     yield {
-                        #'nbr': offering.xpath('./tr[2]/td[2]/text()').extract_first(),
-                        'loc': info[2].split('(')[0],
-                        'end': info[1][8:],
-                        'start': info[1][0:5],
-                        'day': info[0],
-                        'type': offering.xpath('./tr[4]/td[2]/text()').extract_first(),
-                        'code': code,
-                    }
+                            #'nbr': offering.xpath('./tr[2]/td[2]/text()').extract_first(),
+                            'loc': info[2].split('(')[0],
+                            'end': info[1][8:],
+                            'start': info[1][0:5],
+                            'day': info[0],
+                            'type': offering.xpath('./tr[4]/td[2]/text()').extract_first(),
+                            'code': code,
+                            }
